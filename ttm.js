@@ -28,10 +28,14 @@ twit.getUserTimeline({screen_name: screen_name, count: argv.count, exclude_repli
         '\ntype: twitter' +
         '\n---\n'
             
-       var body = '\n' + data[i].text
+       var body = data[i].text
+       
+       body = body
+        .replace(/\B#([^ ]+)/ig, '<a href="https://twitter.com/search?q=' + encodeURIComponent('#') + '$1">#$1</a>')
+        .replace(/\B\@([^ ]+)/ig, '<a href="https://twitter.com/$1">@$1</a>')
        
        filename = moment(data[i].created_at).format('YYYY-MM-DD') + '-twitter-' + data[i].id_str
-       fs.writeFile(argv.path +  '/' + filename + '.md', header + body, function (err) {
+       fs.writeFile(argv.path +  '/' + filename + '.md', header + '\n' + body, function (err) {
          if (err) throw err
        });
        
