@@ -26,6 +26,7 @@ twit.getUserTimeline({screen_name: screen_name, count: argv.count, exclude_repli
         '---\n' +
         '\ntitle: ' + data.text.replace('"', '').replace(':', '') + 
         '\ndate: ' + moment(data.created_at).format('YYYY-MM-DD h:mm:ss') + 
+        '\npermalink: ' + 'twitter/' + data.id_str + 
         '\ntwitter_url: ' + 'http://twitter.com/' + screen_name + '/status/' + data.id_str + 
         '\ntype: twitter' +
         '\n---\n'
