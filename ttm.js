@@ -18,38 +18,38 @@ var twit = new ntwitter({
 var screen_name = config.screen_name
 
 twit.getUserTimeline({screen_name: screen_name, count: argv.count, exclude_replies: false},
-   function (err, data) {
+   function (err, item) {
 
-     for (var i=0; i < data.length; i++) {
-       
+     each(item)
+     .on('item', function(data, i, next) {
        var header = 
         '---\n' +
-        '\ntitle: "' + data[i].text + '"' + 
-        '\ndate: ' + moment(data[i].created_at).format('YYYY-MM-DD h:mm:ss') + 
-        '\nurl: ' + 'http://twitter.com/' + screen_name + '/status/' + data[i].id_str + 
+        '\ntitle: ' + data.text.replace('"', '').replace(':', '') + 
+        '\ndate: ' + moment(data.created_at).format('YYYY-MM-DD h:mm:ss') + 
+        '\ntwitter_url: ' + 'http://twitter.com/' + screen_name + '/status/' + data.id_str + 
         '\ntype: twitter' +
         '\n---\n'
             
-       var body = data[i].text
+       var body = data.text
 
-       expandUrls(body, i, function(body, i) {
+       expandUrls(body, function(body) {
          body = body
            .replace(/\B#([^ ]+)/ig, '<a href="https://twitter.com/search?q=' + encodeURIComponent('#') + '$1">#$1</a>')
            .replace(/\B\@([^ ]+)/ig, '<a href="https://twitter.com/$1">@$1</a>')
-          filename = moment(data[i].created_at).format('YYYY-MM-DD') + '-twitter-' + data[i].id_str
+          filename = moment(data.created_at).format('YYYY-MM-DD') + '-twitter-' + data.id_str
           fs.writeFile(argv.path +  '/' + filename + '.md', header + '\n' + body, function (err) {
             if (err) throw err
           });
-       })
-       
-     };
+          setTimeout(next, 0);             
+       })       
+     })
    }
 );
 
 
 
-function expandUrls(str, i, callback) {
-  
+function expandUrls(str, callback) {
+    
   var matches = str.match(/((^|\s)(https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi)
   if (matches) {
   each(matches)
@@ -65,9 +65,9 @@ function expandUrls(str, i, callback) {
     })
   })
   .on('end', function() {
-    return callback(str, i)
+    return callback(str)
   });
   } else {
-    return callback(str, i)
+    return callback(str)
   }
 }
