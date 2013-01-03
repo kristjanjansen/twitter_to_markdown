@@ -4,21 +4,24 @@ Twitter to Jekyll-compatible Markdown files converter with @ and # autolinking a
 
 ### Usage
 
-1. Get the code
+#### 1. Get the code
 
 ```
 git clone https://github.com/kristjanjansen/twitter_to_markdown.git
 cd twitter_to_markdown
 ```
 
-2. Install modules
+#### 2. Install modules
 
 ```
 npm install
 ```
 
-3. Create ```config/default.json``` file and fill the values from https://dev.twitter.com
+#### 3. Create config/default.json file
 
+Get the values from https://dev.twitter.com
+
+```
 {
   "consumer_key": "",
   "consumer_secret": "",
@@ -26,8 +29,9 @@ npm install
   "access_token_secret": "",
   "screen_name": ""  
 }
+```
 
-4. Run
+#### 4. Run
 
 ```
 node ttm.js --path=where/to/put/md/files --count=20
