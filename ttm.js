@@ -49,7 +49,7 @@ twit.getUserTimeline({screen_name: screen_name, count: argv.count, exclude_repli
 
 
 function expandUrls(str, callback) {
-/*    
+    
   var matches = str.match(/((^|\s)(https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi)
   if (matches) {
   each(matches)
@@ -68,7 +68,7 @@ function expandUrls(str, callback) {
     return callback(str)
   });
   } else {
-*/    return callback(str)
-/*  }
-*/
+    return callback(str)
+  }
+
 }

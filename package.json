@@ -1,0 +1,12 @@
+{
+  "name": "twitter_to_markdown",
+  "version": "0.0.1",
+  "dependencies": {
+    "config": "0.4.x",
+    "each": "0.3.x",
+    "moment": "1.7.x",
+    "ntwitter": "0.5.x",
+    "optimist": "0.3.x",
+    "request": "2.12.x"
+  }
+}
