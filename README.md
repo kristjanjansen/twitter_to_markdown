@@ -1,6 +1,6 @@
 ## Twitter to Markdown
 
-Utilty to convert Twitter posts to (Jekyll)[http://jekyllrb.com]-compatible Markdown files. @ and # are auto-linked and short URLs are resolved to full URLs.
+Utilty to convert Twitter posts to [Jekyll](http://jekyllrb.com)-compatible Markdown files. @ and # are auto-linked and short URLs are resolved to full URLs.
 
 ### Usage
 
